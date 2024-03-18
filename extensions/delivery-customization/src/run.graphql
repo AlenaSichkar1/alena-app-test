@@ -1,0 +1,32 @@
+query RunInput {
+  cart {
+    deliveryGroups {
+      deliveryAddress {
+        provinceCode
+        countryCode
+      }
+      deliveryOptions {
+        handle
+        title
+      }
+    }
+  }
+  localization {
+    country {
+      isoCode
+    }
+  }
+  shop {
+    localTime {
+      date
+    }
+    metafield(namespace: "shipping", key: "data") {
+      value
+    }
+  }
+  deliveryCustomization {
+      metafield(namespace: "delivery-customization", key: "function-configuration") {
+        value
+      }
+  }
+}
