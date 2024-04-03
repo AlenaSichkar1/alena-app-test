@@ -22,9 +22,15 @@ function App() {
   const addressCity = address.city ?? "";
 
   const POBoxesText = ['P.O. Box', 'P.O Box', 'PO BOX', 'Packstation', 'BOX', 'Postfiliale', 'APO AE', 'FPO AE', 'APO', 'FPO', 'PO', 'P.O.', 'P.O'];
-  const containsPOBox1 = POBoxesText.some(text => address1.toLowerCase().includes(text.toLowerCase()));
-  const containsPOBox2 = POBoxesText.some(text => address2.toLowerCase().includes(text.toLowerCase()));
-  const containsPOBoxCity = POBoxesText.some(text => addressCity.toLowerCase().includes(text.toLowerCase()));
+
+  const containsPOBox = (address) => {
+    const words = address.toLowerCase().split(/\s+/);
+    return POBoxesText.some(text => words.includes(text.toLowerCase()));
+  };
+
+  const containsPOBox1 = containsPOBox(address1);
+  const containsPOBox2 = containsPOBox(address2);
+  const containsPOBoxCity = containsPOBox(addressCity);
 
   useBuyerJourneyIntercept(({ canBlockProgress }) => {
     if (!canBlockProgress) return
