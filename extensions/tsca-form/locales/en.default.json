@@ -1,0 +1,5 @@
+{
+  "welcome": "Welcome to the {{target}} extension!",
+  "TSCA_form_title": "Hello, we see you've ordered a pen",
+  "TSCA_form_text": "Please tick this box to allow paper republic to complete the TSCA paperwork on your behalf so FedEx can\n            import your order into the USA. Thanks, the paper republic team. More information"
+}
