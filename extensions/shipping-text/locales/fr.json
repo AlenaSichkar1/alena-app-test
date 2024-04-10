@@ -1,3 +1,4 @@
 {
-  "welcome": "Bienvenue dans l'extension {{target}}!"
+  "welcome": "Bienvenue dans l'extension {{target}}!",
+  "delayed_order_text": "Shipping time may currently be delayed due to the high volume of orders."
 }

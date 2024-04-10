@@ -1,5 +1,7 @@
 {
   "welcome": "Welcome to the {{target}} extension!",
   "TSCA_form_title": "Hello, we see you've ordered a pen",
-  "TSCA_form_text": "Please tick this box to allow paper republic to complete the TSCA paperwork on your behalf so FedEx can\n            import your order into the USA. Thanks, the paper republic team. More information"
+  "TSCA_form_text": "Please tick this box to allow paper republic to complete the TSCA paperwork on your behalf so FedEx can import your order into the USA. Thanks, the paper republic team.",
+  "TSCA_modal_title": "TSCA Info",
+  "TSCA_modal_text": "As our pens & le baume crème are defined as liquids and are shipped from Austria, Europe, they require Toxic Substances Control Act (TSCA) clearance before entering the USA. None of our products are toxic; this is a standard procedure. By giving us permission to sign the TSCA customs clearance form for your order, it ensures a quick and hassle-free customs clearance for your parcel to the USA."
 }

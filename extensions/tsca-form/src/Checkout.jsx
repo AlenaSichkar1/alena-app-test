@@ -1,9 +1,14 @@
 import {
   reactExtension,
+  useApi,
   BlockStack,
   View,
   Heading,
   Checkbox,
+  Modal,
+  Link,
+  TextBlock,
+  Button,
   useShippingAddress,
   useCartLines,
   useExtensionCapability,
@@ -35,6 +40,7 @@ function App() {
   // Merchants can toggle the `block_progress` capability behavior within the checkout editor
   const canBlockProgress = useExtensionCapability("block_progress");
   const translate = useTranslate();
+  const {ui} = useApi();
 
   // Use the `buyerJourney` intercept to conditionally block checkout progress
   useBuyerJourneyIntercept(({ canBlockProgress }) => {
@@ -93,6 +99,24 @@ function App() {
           >
             {translate('TSCA_form_text')}
           </Checkbox>
+
+          <BlockStack padding='tight'></BlockStack>
+
+          <Link
+            overlay={
+              <Modal
+                id="tsca-info"
+                padding
+                title={translate('TSCA_modal_title')}
+              >
+                <TextBlock>
+                  {translate('TSCA_modal_text')}
+                </TextBlock>
+              </Modal>
+            }
+          >
+            More information
+          </Link>
         </View>
       </>
     );
