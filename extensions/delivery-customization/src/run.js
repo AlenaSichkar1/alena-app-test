@@ -14,34 +14,24 @@
  */
 export function run(input) {
   // The message to be added to the delivery option
-  const message = "May be delayed due to weather conditions";
+  // const message = "May be delayed due to weather conditions";
 
-  let countryCode = input.localization.country.isoCode;
-  let todayDate = input.shop.localTime.date;
+  const countryCode = input.localization.country.isoCode;
+  const todayDate = input.shop.localTime.date;
+  const countryArray1 = JSON.parse(input.shop.dataShipping1?.value ?? "{}");
+  const countryArray2 = JSON.parse(input.shop.dataShipping2?.value ?? "{}");
+  const countryArray3 = JSON.parse(input.shop.dataShipping3?.value ?? "{}");
+  const countryObject = getCountryObject(countryCode, countryArray1, countryArray2, countryArray3);
 
-  // console.log('countryCode', countryCode);
+  // console.log('countryObject', countryObject);
+  // console.log('countryObject', countryObject["Standard"]);
 
-  // console.log('dateStandard', input.shop.localTime.date);
-  // console.log('startDatePriority', startDatePriority);
-  // console.log('endDatePriority', endDatePriority);
-  // console.log('textDatePriority', textDatePriority);
-
-  const configuration = JSON.parse(
-    input.shop.metafield?.value ?? "{}"
-  );
-
-  const countryArray = configuration.Sheet1;
-
-  // console.log('metafield', input.shop.metafield.value);
-
-  const countryObject = getCountryObject(countryCode, countryArray);
-
-  let dateStandard = countryObject[0]["Standard"] != undefined ? getShippingDate(parseInt(countryObject[0]["Standard"]), todayDate) : '';
-  let endDatePriority = countryObject[0]["Priority_max"] != undefined ? getShippingDate(countryObject[0]["Priority_max"], todayDate) : '';
-  let startDatePriority = countryObject[0]["Priority_min"] != undefined ? getShippingDate(countryObject[0]["Priority_min"], todayDate) : '';
-  let endDateExpress = countryObject[0]["Express_max"] != undefined ? getShippingDate(countryObject[0]["Express_max"], todayDate) : '';
-  let startDateExpress = countryObject[0]["Express_min"] != undefined ? getShippingDate(countryObject[0]["Express_min"], todayDate) : '';
-  let dateCollect = countryObject[0]["Collect"] != undefined ? getShippingDate(parseInt(countryObject[0]["Collect"]), todayDate) : '';
+  let dateStandard = countryObject["Standard"] != undefined ? getShippingDate(parseInt(countryObject["Standard"]), todayDate) : '';
+  let endDatePriority = countryObject["Priority_max"] != undefined ? getShippingDate(countryObject["Priority_max"], todayDate) : '';
+  let startDatePriority = countryObject["Priority_min"] != undefined ? getShippingDate(countryObject["Priority_min"], todayDate) : '';
+  let endDateExpress = countryObject["Express_max"] != undefined ? getShippingDate(countryObject["Express_max"], todayDate) : '';
+  let startDateExpress = countryObject["Express_min"] != undefined ? getShippingDate(countryObject["Express_min"], todayDate) : '';
+  let dateCollect = countryObject["Collect"] != undefined ? getShippingDate(parseInt(countryObject["Collect"]), todayDate) : '';
 
   let textDateStandard, textDatePriority, textDateExpress, textDateCollect;
 
@@ -58,17 +48,6 @@ export function run(input) {
   if (dateCollect != '') {
     textDateCollect = formatDate(dateCollect);
   }
-
-  // console.log(parseInt(countryObject[0]["Standard"]));
-
-  // let dateStandard = getShippingDate(5);
-  // let startDatePriority = getShippingDate(5, todayDate);
-  // let endDatePriority = getShippingDate(8, todayDate);
-  // let textDatePriority = '';
-
-  // if (startDatePriority != '') {
-  //   textDatePriority = 'between  ' + formatDate(startDatePriority) + ' and ' + formatDate(endDatePriority);
-  // }
 
   // console.log('textDateStandard', textDateStandard);
   // console.log('textDatePriority', textDatePriority);
@@ -88,19 +67,6 @@ export function run(input) {
       }
   }));
 
-  // let toRename = input.cart.deliveryGroups
-  //   // Filter for delivery groups with a shipping address containing the affected state or province
-  //   .filter(group => group.deliveryAddress?.provinceCode &&
-  //     group.deliveryAddress.provinceCode == "NC")
-  //   // Collect the delivery options from these groups
-  //   .flatMap(group => group.deliveryOptions)
-  //   // Construct a rename operation for each, adding the message to the option title
-  //   .map(option => /** @type {Operation} */({
-  //     rename: {
-  //       deliveryOptionHandle: option.handle,
-  //       title: option.title ? `${option.title} - ${message}` : message
-  //     }
-  //   }));
 
   // The @shopify/shopify_function package applies JSON.stringify() to your function result
   // and writes it to STDOUT
@@ -120,7 +86,7 @@ function getShippingDate(noOfDaysToAdd, todayDate) {
 
   var startDateFormat = startDate.getDate() + '/' + (startDate.getMonth() + 1) + '/' + startDate.getFullYear();
   var endDate = "",
-    count = 0;
+      count = 0;
 
   // var time_delay = checkProductsInCart();
   var time_delay = 0;
@@ -153,11 +119,13 @@ function formatDate(date) {
   return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()];
 }
 
-function getCountryObject(country_code, countryArray) {
-  var currentCountryObject = countryArray.filter(function (obj) {
-    var object_country_code = obj['Country Code'].trim();
-    return object_country_code == country_code;
-  });
-
-  return currentCountryObject;
+function getCountryObject(country_code, ...countryArrays) {
+  for (const countryArray of countryArrays) {
+    const currentCountryObject = countryArray.find(obj => obj['Country Code'].trim() === country_code);
+    if (currentCountryObject) {
+      return currentCountryObject;
+    }
+  }
+  return null;
 }
+

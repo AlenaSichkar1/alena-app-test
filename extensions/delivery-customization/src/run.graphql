@@ -1,10 +1,6 @@
 query RunInput {
   cart {
     deliveryGroups {
-      deliveryAddress {
-        provinceCode
-        countryCode
-      }
       deliveryOptions {
         handle
         title
@@ -20,13 +16,23 @@ query RunInput {
     localTime {
       date
     }
-    metafield(namespace: "shipping", key: "data") {
-      value
-    }
-  }
-  deliveryCustomization {
-      metafield(namespace: "delivery-customization", key: "function-configuration") {
+    dataShipping1: metafield(
+        namespace: "shipping"
+        key: "data1"
+    ) {
         value
-      }
+    }
+    dataShipping2: metafield(
+        namespace: "shipping"
+        key: "data2"
+    ) {
+        value
+    }
+    dataShipping3: metafield(
+        namespace: "shipping"
+        key: "data3"
+    ) {
+        value
+    }
   }
 }
