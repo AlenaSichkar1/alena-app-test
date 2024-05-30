@@ -32,42 +32,42 @@ function App() {
   const containsPOBox2 = containsPOBox(address2);
   const containsPOBoxCity = containsPOBox(addressCity);
 
-  useBuyerJourneyIntercept(({ canBlockProgress }) => {
-    if (!canBlockProgress) return
-
-    let errors = [];
-
-    if (containsPOBox1) {
-      errors.push({
-        message: translate('po_box_error'),
-        target: '$.cart.deliveryGroups[0].deliveryAddress.address1'
-      });
-    }
-
-    if (containsPOBox2) {
-      errors.push({
-        message: translate('po_box_error'),
-        target: '$.cart.deliveryGroups[0].deliveryAddress.address2'
-      });
-    }
-
-    if (containsPOBoxCity) {
-      errors.push({
-        message: translate('po_box_error'),
-        target: '$.cart.deliveryGroups[0].deliveryAddress.city'
-      });
-    }
-
-    if (containsPOBox1 || containsPOBox2 || containsPOBoxCity) {
-      return {
-        behavior: "block",
-        reason: "P.O Boxes",
-        errors: errors
-      };
-    }
-
-    return {
-      behavior: "allow"
-    };
-  });
+  // useBuyerJourneyIntercept(({ canBlockProgress }) => {
+  //   if (!canBlockProgress) return
+  //
+  //   let errors = [];
+  //
+  //   if (containsPOBox1) {
+  //     errors.push({
+  //       message: translate('po_box_error'),
+  //       target: '$.cart.deliveryGroups[0].deliveryAddress.address1'
+  //     });
+  //   }
+  //
+  //   if (containsPOBox2) {
+  //     errors.push({
+  //       message: translate('po_box_error'),
+  //       target: '$.cart.deliveryGroups[0].deliveryAddress.address2'
+  //     });
+  //   }
+  //
+  //   if (containsPOBoxCity) {
+  //     errors.push({
+  //       message: translate('po_box_error'),
+  //       target: '$.cart.deliveryGroups[0].deliveryAddress.city'
+  //     });
+  //   }
+  //
+  //   if (containsPOBox1 || containsPOBox2 || containsPOBoxCity) {
+  //     return {
+  //       behavior: "block",
+  //       reason: "P.O Boxes",
+  //       errors: errors
+  //     };
+  //   }
+  //
+  //   return {
+  //     behavior: "allow"
+  //   };
+  // });
 }

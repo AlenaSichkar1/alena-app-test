@@ -7,8 +7,8 @@ api_version = "2023-10"
 
 [[extensions]]
 type = "ui_extension"
-name = "client-validation"
-handle = "client-validation"
+name = "po-box-validation"
+handle = "po-box-validation"
 
 # Controls where in Shopify your extension will be injected,
 # and the file that contains your extension’s source code. Learn more:

@@ -2,7 +2,7 @@
 
 client_id = "4f465a1a7a230bbea5bbfbe6564e52a0"
 name = "alena-test-app-2"
-application_url = "https://requested-compounds-ion-robin.trycloudflare.com"
+application_url = "https://johnny-olympus-magnet-joke.trycloudflare.com"
 embedded = true
 
 [build]
@@ -12,13 +12,13 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_customers,write_delivery_customizations"
+scopes = "read_customers,write_cart_transforms,write_delivery_customizations,write_products"
 
 [auth]
 redirect_urls = [
-  "https://requested-compounds-ion-robin.trycloudflare.com/auth/callback",
-  "https://requested-compounds-ion-robin.trycloudflare.com/auth/shopify/callback",
-  "https://requested-compounds-ion-robin.trycloudflare.com/api/auth/callback"
+  "https://johnny-olympus-magnet-joke.trycloudflare.com/auth/callback",
+  "https://johnny-olympus-magnet-joke.trycloudflare.com/auth/shopify/callback",
+  "https://johnny-olympus-magnet-joke.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
